@@ -70,6 +70,10 @@ void erase(Vector * vector, int i){
     }
 }
 
+int front(Vector * vector) {
+    return vector->elements[0];
+}
+
 int main() {
     Vector v1 = create(10);
 
