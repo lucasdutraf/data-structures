@@ -45,6 +45,10 @@ void pop_back(Vector * vector) {
     }
 }
 
+unsigned int capacity(Vector * vector) {
+    return vector->capacity;
+}
+
 void print(Vector * vector) {
     printf("[");
     for(int i = 0; i < vector->size; ++i) {
