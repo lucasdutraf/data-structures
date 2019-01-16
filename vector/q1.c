@@ -74,6 +74,10 @@ int front(Vector * vector) {
     return vector->elements[0];
 }
 
+int back(Vector * vector) {
+    return vector->elements[vector->size - 1];
+}
+
 int main() {
     Vector v1 = create(10);
 
