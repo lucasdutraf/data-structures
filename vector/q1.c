@@ -12,7 +12,7 @@ Vector create(int capacity) {
     Vector v;
     v.capacity = capacity;
     v.size = 0;
-    v.elements = (int *) malloc(capacity * sizeof(int));
+    v.elements = (int *) calloc(capacity, sizeof(int));
     return v;
 }
 
@@ -25,9 +25,9 @@ void destroy (Vector * vector) {
 
 void push_back(Vector * vector, int new_element) {
     if (vector->capacity == vector->size) {
-        vector->elements = (int *) realloc(vector->elements, (2 * vector->capacity) * sizeof(int));
-        vector->capacity *= 2;
-        vector->elements[vector->size++] = new_element;
+        vector->elements = (int *) realloc(vector->elements, (vector->capacity + 1) * sizeof(int));
+        vector->capacity += 1;
+        vector->elements[vector->size] = new_element;
         vector->size++;
     }
     else {
