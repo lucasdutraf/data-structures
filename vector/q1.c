@@ -24,10 +24,10 @@ void destroy (Vector * vector) {
 }
 
 void push_back(Vector * vector, int new_element) {
-    if (vector->capacity == vector->size) {
-        vector->elements = (int *) realloc(vector->elements, (vector->capacity + 1) * sizeof(int));
-        vector->capacity += 1;
-        vector->elements[vector->size] = new_element;
+    if (vector->capacity >= vector->size) {
+        vector->capacity *= 2;
+        vector->elements = (int *) realloc(vector->elements, vector->capacity * sizeof(int));
+        vector->elements[vector->size] = new_element;   
         vector->size++;
     }
     else {
@@ -77,11 +77,21 @@ void erase(Vector * vector, int i){
 }
 
 int front(Vector * vector) {
-    return vector->elements[0];
+    if (vector->size > 0) {
+        return vector->elements[0];
+    }
+    else {
+        return -1;
+    }
 }
 
 int back(Vector * vector) {
-    return vector->elements[vector->size - 1];
+    if (vector-> size > 0) {
+        return vector->elements[vector->size - 1];
+    }
+    else {
+        return -1;
+    }
 }
 
 void clear(Vector * vector) {
