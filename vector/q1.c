@@ -49,6 +49,10 @@ unsigned int capacity(Vector * vector) {
     return vector->capacity;
 }
 
+unsigned int size(Vector * vector) {
+    return vector->size;
+}
+
 void print(Vector * vector) {
     printf("[");
     for(int i = 0; i < vector->size; ++i) {
