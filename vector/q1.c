@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Vector {
     int capacity;
@@ -36,7 +37,12 @@ void push_back(Vector * vector, int new_element) {
 }
 
 int at(Vector * vector, int value) {
-    return vector->elements[value];
+    if (value > vector->size) {
+        return -1;
+    }
+    else {
+        return vector->elements[value];
+    }
 }
 
 void pop_back(Vector * vector) {
@@ -78,6 +84,11 @@ int back(Vector * vector) {
     return vector->elements[vector->size - 1];
 }
 
+void clear(Vector * vector) {
+    // memset(vector, 0, vector->size);
+    vector->size = 0;
+}
+
 int main() {
     Vector v1 = create(10);
 
@@ -88,34 +99,34 @@ int main() {
     }
     print(&v1);
 
-    // for (int i = 0; i < 3; ++i) {
-    //     pop_back(&v1);
-    // }
-    // print(&v1);
+    for (int i = 0; i < 3; ++i) {
+        pop_back(&v1);
+    }
+    print(&v1);
 
-    // for (int i = 0; i < 20; i+=3) {
-    //     erase(&v1, i);
-    // }
+    for (int i = 0; i < 20; i+=3) {
+        erase(&v1, i);
+    }
 
-    // for (int i = 0; i < 20; i++) {
-    //     erase(&v1, i);
-    // }
-    // print(&v1);
+    for (int i = 0; i < 20; i++) {
+        erase(&v1, i);
+    }
+    print(&v1);
 
-    // clear(&v1);
-    // for (int i = 0; i < 8; ++i) {
-    //     push_back(&v1, i*3 + 1);
-    // }
-    // print(&v1);
+    clear(&v1);
+    for (int i = 0; i < 8; ++i) {
+        push_back(&v1, i*3 + 1);
+    }
+    print(&v1);
 
-    // printf("v1[3] = %d\n", at(&v1, 3));
-    // printf("v1[4] = %d\n", at(&v1, 4));
-    // printf("v1[6] = %d\n", at(&v1, 6));
-    // printf("v1[7] = %d\n", at(&v1, 7));
+    printf("v1[3] = %d\n", at(&v1, 3));
+    printf("v1[4] = %d\n", at(&v1, 4));
+    printf("v1[6] = %d\n", at(&v1, 6));
+    printf("v1[7] = %d\n", at(&v1, 7));
 
-    // printf("\nfront: %d :: back: %d\n", front(&v1), back(&v1));
+    printf("\nfront: %d :: back: %d\n", front(&v1), back(&v1));
 
-    // destroy(&v1);
+    destroy(&v1);
 
     return 0;
 }
