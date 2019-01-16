@@ -39,12 +39,9 @@ int at(Vector * vector, int value) {
     return vector->elements[value];
 }
 
-int pop_back(Vector * vector) {
+void pop_back(Vector * vector) {
     if(vector->size > 0) {
         vector->size--;
-    }
-    else {
-        return -1;
     }
 }
 
