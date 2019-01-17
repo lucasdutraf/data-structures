@@ -32,7 +32,6 @@ void push_back(Vector * vector, int new_element) {
     }
     else {
         vector->elements[vector->size++] = new_element;
-        vector->size++;
     }
 }
 
