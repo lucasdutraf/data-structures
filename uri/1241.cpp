@@ -1,23 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-using s = string;
 
 int main () {
 
   int ent;
-  s pr, seg;
+  string pr, seg;
   int a = 0;
   cin >> ent;
 
   for (size_t i = 0; i < ent; i++) {
     cin >> pr >> seg;
-    int prlen = pr.size(), seglen = seg.size();
-    s prtemp = pr.substr(pr.size()-seg.size(), seg.size());
-    if (prtemp == seg) {
-      cout << "encaixa" << endl;
+    if (seg.size() > pr.size()) {
+      cout << "nao encaixa" << endl;
     }
     else {
-      cout << "nao encaixa" << endl;
+      long long prlen = pr.size(), seglen = seg.size();
+      long long diff = pr.size()-seg.size();
+      string prtemp = pr.substr(diff, seg.size());
+
+      cout << (prtemp == seg ? "encaixa" : "nao encaixa") << endl;
     }
   }
 
