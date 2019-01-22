@@ -1,14 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
 int main () {
-  int a, b;
-  while (cin >> a >> b) {
+   ll a, b;
+    while (cin >> a >> b) {
     if (a > b) {
-      cout << (a - b) << endl;
+      cout << a - b << endl;
     }
     else {
-      cout << (b - a) << endl;
+      cout << b - a << endl;
     }
   }
 
