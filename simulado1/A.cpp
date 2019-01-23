@@ -12,14 +12,10 @@ int main () {
 
   while (A != 0 && B != 0 && C != 0 && D != 0) {
     if (A > B) {
-      temp = A;
-      A = B;
-      B = temp;
+      swap(A, B);
     }
     if (C > D) {
-      temp2 = C;
-      C = D;
-      D = temp2;
+      swap(C, D);
     }
 
     for (size_t i = A; i < B + 1; i++) {
