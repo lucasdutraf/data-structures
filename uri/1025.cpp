@@ -5,31 +5,29 @@ using vec = vector<int>;
 int main () {
   int mar, a = 1, consult, entrada, consfeita;
   vec marmores;
-  vec aux;
+  //vec aux;
   cin >> mar >> consult;
   while (mar != 0 && consult != 0) {
+    cout << "CASE# " << a << ":\n";
+    a++;
     for (size_t i = 0; i < mar; i++) {
       cin >> entrada;
       marmores.push_back(entrada);
     }
-    a++;
-    aux = marmores;
-    cout << "CASE# " << a << ":" << endl;
-    sort(aux.begin(), aux.end());
+    //aux = marmores;
+    sort(marmores.begin(), marmores.end());
     for (size_t j = 0; j < consult; j++) {
       cin >> consfeita;
-      bool tem = binary_search(aux.begin(), aux.end(), consfeita);
       auto it = find(marmores.begin(), marmores.end(), consfeita);
-      int index = distance(marmores.begin(), it) + 2;
-      if (tem == true) {
-        cout << consfeita << " found at " << index << endl;
+      if (it != marmores.end()) {
+        cout << consfeita << " found at " << it - marmores.begin() + 1 << endl;
       }
       else {
         cout << consfeita << " not found" << endl;
       }
     }
     marmores.clear();
-    aux.clear();
+    //aux.clear();
     cin >> mar >> consult;
   }
   return 0;
