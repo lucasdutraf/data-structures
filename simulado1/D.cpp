@@ -13,11 +13,14 @@ void erase_counting() {
 
 
 int main () {
-  int particip, voto, idVencedor = 0, qtdVotosVencedor = 0;
+  int particip, voto, idVencedor = 0, qtdVotosVencedor = 0, flagNewLine = 0;
   set<int> cand;
 
   cin >> particip;
   while (particip != 0) {
+    if (flagNewLine) {
+      cout << endl;
+    }
     for (size_t i = 0; i < particip; i++) {
       cin >> voto;
       counting[voto]++;
@@ -35,6 +38,7 @@ int main () {
     idVencedor = 0;
     qtdVotosVencedor = 0;
     cin >> particip;
+    flagNewLine = 1;
   }
   return 0;
 }

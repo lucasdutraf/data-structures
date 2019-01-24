@@ -6,10 +6,13 @@ using si = pair<int, string>;
 int main () {
   vector<si> funcionarios;
   string nome;
-  int idade;
+  int idade, flagNewLine = 0;
   int qtd;
   cin >> qtd;
   while (qtd != 0) {
+    if (flagNewLine) {
+      cout << endl;
+    }
     for (size_t i = 0; i < qtd; i++) {
       cin >> nome >> idade;
       funcionarios.push_back(make_pair(idade, nome));
@@ -19,10 +22,7 @@ int main () {
       cout << value.second << endl;
     }
     cin >> qtd;
-    if (qtd != 0) { 
-      cout << endl;
-    }
-    cout << endl;
+    flagNewLine = 1;
     funcionarios.clear();
   }
 
