@@ -1,27 +1,19 @@
-#include <iostream>
-#include <stack>
-#include <map>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-bool is_valid(const string& expression)
+bool is_valid(string expression)
 {
-    static map<char, char> open { {')', '('}, {']', '['}, {'}', '{'}, };
     stack<char> s;
 
-    for (const auto& c : expression)
+    for (auto c : expression)
     {
         switch (c) {
         case '(':
-        case '[':
-        case '{':
             s.push(c);
             break;
 
         case ')':
-        case ']':
-        case '}':
-            if (s.empty() || s.top() != open[c])
+            if (s.empty())
                 return false;
 
             s.pop();
