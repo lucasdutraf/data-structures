@@ -1,12 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool is_valid(string expression)
-{
+bool is_valid(string expression) {
     stack<char> s;
 
-    for (auto c : expression)
-    {
+    for (auto c : expression) {
         switch (c) {
         case '(':
             s.push(c);
@@ -23,8 +21,7 @@ bool is_valid(string expression)
     return s.empty();
 }
 
-int main()
-{
+int main() {
     string expression;
     while (cin >> expression) {
       cout << (is_valid(expression) ? "correct" : "incorrect") << '\n';
