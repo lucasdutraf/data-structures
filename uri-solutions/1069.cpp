@@ -5,17 +5,12 @@ int diamond (string sand) {
   int qtd = 0;
   stack<char> beach;
   for (auto elem : sand) {
-    switch (elem) {
-      case '<':
+    if (elem == '<') {
         beach.push(elem);
-        break;
-
-      case '>':
-        if (beach.empty()) {
-          return false;
-        }
-        qtd++;
-        beach.pop();
+    }
+    else if (elem == '>' && beach.size() > 0) {
+      beach.pop();
+      qtd++;
     }
   }
   return qtd;
