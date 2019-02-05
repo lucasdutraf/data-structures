@@ -1,52 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
 using si = stack<int>;
-using vec = vector<int>;
+using qi = queue<int>;
 
-int main () {
-
-  si entradaA;
+bool trilhos (qi entrada, qi saida) {
   si estacao;
-  si saidaB;
-  vec entry;
-  int vagoes, vagaoNr, success = 0;
+  estacao.push(entrada.front());
+  entrada.pop();
 
-  cin >> vagoes;
-  for (size_t k = vagoes; k >= 0; k--) {
-    entradaA.push(k);
-  }
-  for (size_t i = 0; i < vagoes; i++) {
-    cin >> vagaoNr;
-    entry.push_back(vagaoNr);
-  }
-  for (size_t j = 0; j < entry.size(); j++) {
+  while (true) {
+    if (saida.empty()) return true;
 
-  }
-
-
-  while (!entradaA.empty() && entradaA.top() != entry[j]) {
-    estacao.push(entradaA.top());
-    entradaA.pop();
-    if (estacao.top() == entry[j]) {
-      success++;
+    if (estacao.top() == saida.front()) {
       estacao.pop();
+      saida.pop();
+    }
+    else if (estacao.top() < saida.front()) {
+      estacao.push(entrada.front());
+      entrada.pop();
+    }
+    else return false;
+
+    if (estacao.empty() && !entrada.empty()) {
+      estacao.push(entrada.front());
+      entrada.pop();
     }
   }
-  if (entry[j] == entradaA.top()) {
-    success++;
-    entradaA.pop();
-  }
-  else {
+}
 
+int main () {
+  ios::sync_with_stdio(0);
+  int train, aux;
+  while (cin >> train, train) {
+    while (true) {
+      qi entrada, saida;
+      si estacao;
+      for (size_t i = 1; i < train + 1; i++) entrada.push(i);
+
+      for (size_t j = 0; j < train; j++) {
+        cin >> aux;
+        if(!aux) break;
+        saida.push(aux);
+      }
+      if(!aux) break;
+      cout << (trilhos(entrada, saida) ? "Yes" : "No") << endl;
+    }
+    cout << endl;
   }
 
-
-
-  if (success == vagoes) {
-    cout << "Yes" << endl;
-  }
-  else {
-    cout << "No" << endl;
-  }
   return 0;
 }
