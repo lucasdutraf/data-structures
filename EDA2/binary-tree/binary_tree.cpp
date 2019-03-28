@@ -9,6 +9,40 @@ private:
   }
   Node * root;
 
+  //recebe um nó, função que apenas será usada em conjunto com a erase()
+  void delete_by_merging (Node** n) {
+    auto node = *n;
+    //guarda uma referência para n
+
+    if (node == nullptr) return;
+    //se o nó for vazio, a função se encerra
+
+    if (node->right == nullptr) {
+      *n = node->left;
+      //se o nó possuir apenas uma folha a esquerda, essa folha é atribuída a *n
+    }
+    else if (node->left == nullptr) {
+      *n = node->right;
+      //se o nó possuir apenas uma folha a direita, essa folha é atribuída a *n
+    }
+    else {
+      //caso ele possua dois fihos
+      auto temp = node->left;
+      //atribui a variavel temp a subárvore da esquerda
+
+      while (temp->right) {
+        //enquanto houver um nó a direita na subárvore da esquerda
+        temp = temp->right;
+        //temp é atualizado com o próximo nó a direita
+      }
+      temp->right = node->right;
+      //a variavel temp, mais precisamente o próximo nó a direita, receberá a subárvore da direita
+      *n = node->left;
+      //perguntar ao professor o que essa linha faz
+    }
+    delete node;
+  }
+
 public:
   BST() : root(nullptr) {}
 
@@ -48,6 +82,28 @@ public:
       prev->left = node;
       //caso o valor do parâmetro seja menor que o node->info do último nó avaliado, o nó recém criado é adicionado a esquerda
     }
-
   }
+
+  void erase(const T& info) {
+    Node** node = &root;
+
+    while (*node) {
+      //laço para encontrar o nó que deve ser atribuído para ser excluído
+      if ((*node)->info == info) {
+        break;
+        //para o laço pois a info contida no nó é a procurada
+      }
+      if (info < (*node)->info) {
+        node = &(*node)->left;
+        //se a info contida no nó atual for maior que a recebida do parâmetro, o valor do nó é atualizado para o próximo nó a esquerda
+      }
+      else {
+        node = &(*node)->right;
+        //se a info contida no nó atual for menor que a recebida do parâmetro, o valor do nó é atualizado para o próximo nó a direita
+      }
+      delete_by_merging(node);
+      //chama a função privada para excluir o nó encontrado
+    }
+  }
+
 };
