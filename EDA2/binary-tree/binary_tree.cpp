@@ -43,6 +43,39 @@ private:
     delete node;
   }
 
+  void delete_by_copying(Node** n) {
+    auto node = *n;
+    //deferencia o nó recebido no parâmetro como ponteiro duplo para a referência do ponteiro *n
+
+    if (node == nullptr) return;
+    //se o nó for vazio, a função se encerra
+
+    if (node->right == nullptr) {
+      *n = node->left;
+      //se o nó possuir apenas uma folha a esquerda, essa folha é atribuída a *n
+    }
+    else if (node->left == nullptr) {
+      *n = node->right;
+      //se o nó possuir apenas uma folha a direita, essa folha é atribuída a *n
+    }
+    else {
+      auto temp = &(*n)->left;
+      //temp assume o primeiro nó da subárvore a esquerda
+
+      while ((*temp)->right) {
+        temp = &(*temp)->right;
+        //enquanto for possível ir para direita, ou seja, até achar o nó mais a direita da subárvore a esquerda
+      }
+
+      node->info = (*temp)->info;
+      //troca o valor do nó a ser excluido com a variavel temporaria
+      return delete_by_copying(temp);
+      //chamada recursiva? consultar professor
+    }
+    delete node;
+
+  }
+
 public:
   BST() : root(nullptr) {}
 
@@ -84,7 +117,7 @@ public:
     }
   }
 
-  void erase(const T& info) {
+  void erase_merging(const T& info) {
     Node** node = &root;
 
     while (*node) {
@@ -96,6 +129,30 @@ public:
       if (info < (*node)->info) {
         node = &(*node)->left;
         //se a info contida no nó atual for maior que a recebida do parâmetro, o valor do nó é atualizado para o próximo nó a esquerda
+        //tirar duvida de notação de ponteiros
+      }
+      else {
+        node = &(*node)->right;
+        //se a info contida no nó atual for menor que a recebida do parâmetro, o valor do nó é atualizado para o próximo nó a direita
+      }
+      delete_by_merging(node);
+      //chama a função privada para excluir o nó encontrado
+    }
+  }
+
+  void erase_copying(const T& info) {
+    Node** node = &root;
+
+    while (*node) {
+      //laço para encontrar o nó que deve ser atribuído para ser excluído
+      if ((*node)->info == info) {
+        break;
+        //para o laço pois a info contida no nó é a procurada
+      }
+      if (info < (*node)->info) {
+        node = &(*node)->left;
+        //se a info contida no nó atual for maior que a recebida do parâmetro, o valor do nó é atualizado para o próximo nó a esquerda
+        //tirar duvida de notação de ponteiros
       }
       else {
         node = &(*node)->right;
